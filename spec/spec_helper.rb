@@ -11,6 +11,12 @@ Capybara.register_driver :smartphone do |app|
   Capybara::Poltergeist::Driver.new(app)
 end
 
+Capybara.register_driver :docomo do |app|
+  driver = Capybara::Poltergeist::Driver.new(app)
+  driver.add_header('User-Agent', 'DoCoMo/2.0 P906i(c100;TB;W24H15)')
+  driver
+end
+
 module Capybara
   module Geolocation
     module DSL
