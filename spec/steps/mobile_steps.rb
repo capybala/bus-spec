@@ -1,11 +1,5 @@
 # encoding: utf-8
 
-step 'サイトにアクセスする' do
-  Capybara.current_driver = :webkit
-  Capybara.app_host = 'http://bus.capybala.com/'
-  Capybara.run_server = false
-end
-
 step ':placeに居る' do |place|
   case place
   when '京都市役所'
