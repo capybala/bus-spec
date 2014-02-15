@@ -16,6 +16,10 @@ step '画面に:labelボタンが表示されていること' do |label|
   expect(page).to have_link(label)
 end
 
+step '画面にdocomoの絵文字が表示されていること' do
+  expect(page).to have_content("\ue731")
+end
+
 step ':labelボタンをクリックする' do |label|
   click_link label
 end
