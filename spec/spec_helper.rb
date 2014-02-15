@@ -1,11 +1,7 @@
 Dir.glob('spec/steps/*steps.rb') { |f| load f, true }
 
-require 'capybara/dsl'
 require 'capybara/rspec'
 require 'capybara/poltergeist'
-require 'rspec/autorun'
-require 'turnip'
-require 'turnip/capybara'
 
 Capybara.register_driver :smartphone do |app|
   Capybara::Poltergeist::Driver.new(app)
