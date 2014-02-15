@@ -4,8 +4,8 @@ step 'PCまたはスマートフォンを利用している' do
   Capybara.current_driver = :smartphone
 end
 
-step 'docomoのフィーチャーフォンを利用している' do
-  Capybara.current_driver = :docomo
+step ':careerのフィーチャーフォンを利用している' do |career|
+  Capybara.current_driver = career.to_sym
 end
 
 step 'ポケドスにアクセスする' do
@@ -16,8 +16,14 @@ step '画面に:labelボタンが表示されていること' do |label|
   expect(page).to have_link(label)
 end
 
-step '画面にdocomoの絵文字が表示されていること' do
-  expect(page).to have_content("\ue731")
+step '画面に:careerの絵文字が表示されていること' do |career|
+  # copyright mark for each careers
+  expected_contents = {
+    docomo: "\ue731",
+    au: '&#xE558;',
+    softbank: "\ue24e",
+  }
+  expect(page).to have_content(expected_contents[career])
 end
 
 step ':labelボタンをクリックする' do |label|

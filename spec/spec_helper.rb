@@ -17,6 +17,18 @@ Capybara.register_driver :docomo do |app|
   driver
 end
 
+Capybara.register_driver :au do |app|
+  driver = Capybara::Poltergeist::Driver.new(app)
+  driver.add_header('User-Agent', 'KDDI-HI31 UP.Browser/6.2.0.5 (GUI) MMP/2.0')
+  driver
+end
+
+Capybara.register_driver :softbank do |app|
+  driver = Capybara::Poltergeist::Driver.new(app)
+  driver.add_header('User-Agent', 'SoftBank/1.0/301P/PJP10[/Serial] Browser/NetFront/3.4 Profile/MIDP-2.0 Configuration/CLDC-1.1')
+  driver
+end
+
 module Capybara
   module Geolocation
     module DSL
