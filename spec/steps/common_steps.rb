@@ -1,7 +1,7 @@
 # encoding: utf-8
 
 step 'PCまたはスマートフォンを利用している' do
-  set_user_agent(:iphone)
+  Capybara.current_driver = :smartphone
 end
 
 step 'ポケドスにアクセスする' do

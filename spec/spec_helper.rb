@@ -2,13 +2,14 @@ Dir.glob('spec/steps/*steps.rb') { |f| load f, true }
 
 require 'capybara/dsl'
 require 'capybara/rspec'
-require 'capybara/webkit'
-require 'capybara/user_agent'
+require 'capybara/poltergeist'
 require 'rspec/autorun'
 require 'turnip'
 require 'turnip/capybara'
 
-Capybara.default_driver = :webkit
+Capybara.register_driver :smartphone do |app|
+  Capybara::Poltergeist::Driver.new(app)
+end
 
 module Capybara
   module Geolocation
@@ -34,6 +35,5 @@ module Capybara
 end
 
 RSpec.configure do |config|
-  config.include Capybara::UserAgent::DSL
   config.include Capybara::Geolocation::DSL
 end
