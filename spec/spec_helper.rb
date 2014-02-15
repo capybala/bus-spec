@@ -10,23 +10,30 @@ require 'turnip/capybara'
 
 Capybara.default_driver = :webkit
 
-RSpec.configure do |config|
-  config.include Capybara::UserAgent::DSL
+module Capybara
+  module Geolocation
+    module DSL
+      def simulate_location(latitude, longitude, accuracy=0)
+        Capybara.current_session.execute_script <<-EOS
+          window.navigator.geolocation = {
+            getCurrentPosition: function(success){
+              var position = {
+                coords: {
+                  latitude: #{latitude},
+                  longitude: #{longitude},
+                  accuracy: #{accuracy}
+                }
+              };
+              success(position);
+            }
+          };
+        EOS
+      end
+    end
+  end
 end
 
-def simulate_location(latitude, longitude, accuracy=0)
-  page.execute_script <<-EOS
-    window.navigator.geolocation = {
-      getCurrentPosition: function(success){
-        var position = {
-          coords: {
-            latitude: #{latitude},
-            longitude: #{longitude},
-            accuracy: #{accuracy}
-          }
-        };
-        success(position);
-      }
-    };
-  EOS
+RSpec.configure do |config|
+  config.include Capybara::UserAgent::DSL
+  config.include Capybara::Geolocation::DSL
 end
