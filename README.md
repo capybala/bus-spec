@@ -1,7 +1,7 @@
 bus-spec
 ========
 
-Turnip spec for pokedos
+[Turnip](https://github.com/jnicklas/turnip) specs for [pokedos](http://bus.capybala.com/)
 
 
 Usage
